@@ -1,0 +1,49 @@
+DELIMITER $$
+CREATE TRIGGER before_insert_products
+before insert on products
+
+FOR EACH ROW
+BEGIN
+ if new.quantity!=0 then
+  set new.availability=1;
+ end if;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER before_delete_products
+before delete on products
+
+FOR EACH ROW
+BEGIN
+ delete from product_category
+  where product_id=old.id;
+END$$
+DELIMITER;
+
+DELIMITER $$
+CREATE TRIGGER before_update_products
+before update on products
+
+FOR EACH ROW
+BEGIN
+ if new.quantity=0 then
+  set new.availability=0; 
+  else 
+  set new.availability=1;
+ end if;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER before_insert_category
+before INSERT ON category
+ 
+FOR EACH ROW
+BEGIN
+ DECLARE level_parent DOUBLE DEFAULT 0;
+ select level into level_parent from category where id=New.parent_id limit 1;
+ sET new.level=level_parent+1;
+   
+END$$
+DELIMITER ;
