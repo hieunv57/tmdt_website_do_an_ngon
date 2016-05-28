@@ -13,6 +13,7 @@ use App\WishListPlace;
 use App\Foods;
 use File;
 use DB;
+use App\CommentsPlace;
 use App\CategoryPlace;
 
 class PlaceController extends Controller {
@@ -175,4 +176,16 @@ class PlaceController extends Controller {
         return view('pages.wishlist',compact('wishlists'));
     }
 
+    public function comment(Request $request, $link)
+    {
+    	$input=$request->all();
+    	$cmt = new CommentsPlace;
+    	$cmt ->comment = $input['comment'];
+    	$cmt ->user_id = Auth::user()->id;
+    	$place_detail  = new Place;
+        $place_detail  = $place_detail->findPlaceDetails($link)->first();
+    	$cmt ->place_id = $place_detail->id;
+    	$cmt->save();
+    	return redirect()->back();
+    }
 }

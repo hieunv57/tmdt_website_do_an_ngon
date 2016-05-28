@@ -80,6 +80,9 @@ Route::group(array('middleware'=> 'auth'),function(){
 		Route::get('dang-mon-ngon', 'User\FoodController@create');
 		Route::post('dang-mon-ngon', 'User\FoodController@store');
 
+		//Binh luan
+		Route::post('dia-diem/binh-luan/{link}', 'User\PlaceController@comment');
+
 		//xem thong tin nguoi dung khac
 
 	});

@@ -121,8 +121,57 @@
                                         
                                     </div>
                                      <div id="tabs-23">
-                                       <div class="fb-comments" data-href="{{asset($place_detail->link)}}" data-numposts="10"></div>
-                                     </div>
+                                                               <div class="b-comments-box">
+                            <div class="b-comment__title f-comment__title">
+                                <span class="b-comment__title__name f-primary-b">32 Comments</span>
+                                <a href="#" class="b-comment__now f-comment__now">
+                                    <i class="fa fa-comments-o"></i> Leave a comment now
+                                </a>
+                            </div>
+                            <div class="b-comment__list">
+                                <ul>
+                                <!-- Bắt đầu bình luận -->
+                                @foreach($cmt as $item)
+                                    <li>
+                                        <div class="b-comment-item">
+                                            <div class="b-comment__img">
+                                                <img data-retina src="img/users/comment_img.jpg" alt="">
+                                            </div>
+                                            <div class="b-comment__descr">
+                                                <div class="b-comment__descr__data">
+                                                    <div class="b-comment__descr__name f-comment__descr__name f-primary-b">{{$item->user_name}}</div>
+                                                    <div class="b-comment__descr__info f-comment__descr__info">
+                                                        <span class="f-comment__date">{{$item->created_at}}</span> <i class="b-comment__infp__slash">/</i>
+                                                    </div>
+                                                </div>
+                                                <div class="f-comment__descr__txt">
+                                                    <p>{{$item->comment}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endforeach
+                                   <!--  Kết thúc bình luận -->
+                                </ul>
+                            </div>
+                        </div>
+                        <br>
+                        <h3 class="f-primary-b b-title-description f-title-description">
+                            Bình luận
+                        </h3>
+                        <form method="POST" action="{{asset('dia-diem/binh-luan/'. $place_detail->link)}}" enctype="multipart/form-data" >
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <div class="row">
+                                <div class="b-form-row b-form--contact-size">
+                                    <label class="b-form-vertical__label" for="create_account_phone">Bình luận của bạn</label>
+                                    <textarea name="comment" class="form-control" rows="5"></textarea>
+                                </div>
+                                <div class="b-form-row">
+                                    <button type="submit" class="b-btn f-btn b-btn-md b-btn-default f-primary-b b-btn__w100">Gửi bình luận</button>
+                                </div>
+                        </div>
+                        </form>
+
                                      <div id="tabs-24">
                                        <!-- <div class="fb-comments" data-href="{{asset($place_detail->link)}}" data-numposts="10"></div> -->
                                      </div>

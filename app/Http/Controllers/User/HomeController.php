@@ -10,6 +10,7 @@ use DB;
 use App\Foods;
 use App\WishListPlace;
 use Session;
+use App\CommentsPlace;
 use Auth;
 
 class HomeController extends Controller {
@@ -113,8 +114,9 @@ class HomeController extends Controller {
 			$wishlist_place = new WishListPlace;
 			$wishlist_place = $wishlist_place->findAllWishListPlace()->get();
 		}
-
-        return view('fontend.pages.place.show', compact('place_detail', 'image', 'random_place', 'related','wishlist_place'));
+		$cmt = new CommentsPlace;
+		$cmt = $cmt->findComment($link_place)->get();
+        return view('fontend.pages.place.show', compact('place_detail','cmt', 'image', 'random_place', 'related','wishlist_place'));
 	}
 
 	/**

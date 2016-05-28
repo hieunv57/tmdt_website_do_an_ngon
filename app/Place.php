@@ -58,9 +58,11 @@ class Place extends Model {
 	        ->join('category','category_place.category_id','=','category.id')
 	        ->join('user_place','place.id','=','user_place.place_id')
 	        ->join('users','user_place.user_id','=','users.id')
+            // ->join('comments_place','place.id','=','comments_place.place_id')
 	        ->where('place.link','=', $link);
 	    return $place;
     }
+   
 
      public function findRelatedPlace($id)
     {
