@@ -27,10 +27,6 @@ Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback
 Route::get('login/google', 'Auth\AuthController@google');
 Route::get('google/callback', 'Auth\AuthController@callbackgoogle');
 
-$s = 'social.';
-Route::get('/social/redirect/{provider}',   ['as' => $s . 'redirect',   'uses' => 'Auth\AuthController@getSocialRedirect']);
-Route::get('/social/handle/{provider}',     ['as' => $s . 'handle',     'uses' => 'Auth\AuthController@getSocialHandle']);
-
 //route danh muc dia diem
 Route::get('danh-muc/{link}', 'User\HomeController@category');
 
@@ -39,15 +35,11 @@ Route::get('dia-diem/{link}', 'User\HomeController@show');
 
 Route::get('mon-ngon/{link}', 'User\HomeController@showfood');
 
-Route::get('danh-sach/mon-ngon-moi-nhat', 'User\HomeController@newfood');
-
-//
 Route::get('lay-lai-mat-khau', 'User\UserController@lostpassword');
 
 //Route cac trang
-Route::get('danh-sach/dia-diem-duoc-quan-tam', 'User\HomeController@placemostview');
-
-
+Route::get('danh-sach/dia-diem-moi', 'User\ListPlaceController@newplace');
+Route::get('danh-sach/dia-diem-duoc-danh-gia-cao', 'User\ListPlaceController@highpoint');
 
 //route tim kiem
 Route::post('tag','User\HomeController@tag');
@@ -81,7 +73,11 @@ Route::group(array('middleware'=> 'auth'),function(){
 		Route::post('dang-mon-ngon', 'User\FoodController@store');
 
 		//Binh luan
-		Route::post('dia-diem/binh-luan/{link}', 'User\PlaceController@comment');
+		Route::post('binh-luan/{link}', 'User\PlaceController@comment');
+
+		Route::post('dia-diem/danh-gia', 'User\PlaceController@ratexxx');
+
+		Route::post('dia-diem/binh-luan', 'User\PlaceController@cmt');
 
 		//xem thong tin nguoi dung khac
 
@@ -151,3 +147,4 @@ Route::group(array('before' => 'admin', 'middleware'=> 'auth'),function(){
 		Route::post('admin/tin-tuc/them-moi', 'Admin\NewsController@store');
 	});
 
+Route::get('demo', 'User\PlaceController@demo');

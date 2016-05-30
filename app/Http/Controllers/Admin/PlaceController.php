@@ -6,6 +6,7 @@ use App\Category;
 use App\Place;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Redirect;
 use DB;
 use Input;
 use File;
@@ -183,10 +184,12 @@ class PlaceController extends Controller {
         $places->timeopen=$input['timeopen'];
         $places->price=$input['price'];
         $places->video=$input['video'];
+        $places->address=$input['address'];
         $places->description=$input['description'];
         $data= array(
         	'link' => $places->link,
             'name'  => $places->name,
+            'address' => $places->address,
             'image'    => $places->image,
             'timeopen'=> $places->timeopen,
             'price'    => $places->price,
@@ -199,7 +202,7 @@ class PlaceController extends Controller {
         
         $place=Place::find($id);
         $parent = Category::select('id', 'name', 'parent_id')->get();
-        return view('backend.pages.place.show',compact('place','parent'))->with(['flash_level'=>'success','flash_message'=> 'Cập nhật thành công!']);;
+        return Redirect::back()->with(['flash_level'=>'success','flash_message'=> 'Cập nhật thành công!']);;
 	}
 
 	/**

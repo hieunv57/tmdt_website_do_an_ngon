@@ -18,6 +18,7 @@ class CreateFoodsTable extends Migration {
 			$table->string('name');
 			$table->string('address');
 			$table->string('video');
+			$table->float('avg_point');
 			$table->string('link');
 			$table->longText('description');
 			$table->integer('view');

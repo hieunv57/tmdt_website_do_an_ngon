@@ -1,6 +1,7 @@
 <head>
 <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/S-Bahn-Logo_rot.svg/500px-S-Bahn-Logo_rot.svg.png">
   <meta charset="utf-8">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>@yield('title')</title>
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/S-Bahn-Logo_rot.svg/500px-S-Bahn-Logo_rot.svg.png">
@@ -46,6 +47,15 @@
 <link type="text/css" rel='stylesheet' href="{{asset('public/fontend/js/rs-plugin/videojs/video-js.css')}}">
 
 <link href="{{asset('public/rateit/scripts/rateit.css')}}" rel="stylesheet" type="text/css">
+
+<script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        </script>
+
 <script type="text/javascript">
 	function time() {
 	   var today = new Date();
@@ -83,4 +93,6 @@
 	   }
 	}
 </script>
+<script src="{{asset('public/fontend/ckeditor/ckeditor.js')}}" type="text/javascript" charset="utf-8" async defer></script>
+<!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
 </head>

@@ -24,9 +24,11 @@ class HomeController extends Controller {
 	public function index()
 	{
 		$place_new = new Place;
-		$place_new = $place_new->find_New(9)->get();
+		$place_new = $place_new->find_New(6)->get();
 		$place_most_view = new Place;
-		$place_most_view = $place_most_view->findPlaceMostView(9)->get();
+		$place_most_view = $place_most_view->findPlaceMostView(6)->get();
+		$place_most_wishlist = new Place;
+		$place_most_wishlist = $place_most_wishlist->findPlaceMostWishList(6)->get();
 		//đưa ra số người đăng nhiều sản phẩm nhất
 		$user_post_most_place = new Place;
 		$user_post_most_place = $user_post_most_place->findUserPostMostPlace()->get();
@@ -39,8 +41,9 @@ class HomeController extends Controller {
 		//Món ăn
 		$food_new = new Foods;
 		$food_new = $food_new->findFoodNew(6)->get();
-		
-		return view('fontend.pages.index', compact('place_new', 'place_most_view', 'user_post_most_place','wishlist_place', 'food_new'));
+		$highpoint = new Place;
+		$highpoint = $highpoint->findHighPoint(6)->get();
+		return view('fontend.pages.index', compact('place_new', 'place_most_wishlist', 'place_most_view', 'highpoint','user_post_most_place','wishlist_place', 'food_new'));
 	}
 
 	/**
@@ -90,22 +93,7 @@ class HomeController extends Controller {
       	$related = new Place;
         $related = $related->findRelatedPlace($category->id)->get();
         
-        
-      	
-		// $place = new Place;
-  //       $place = $place->findCategory($category->id)->paginate(9);
-  //       dd($place);
-
         $image = DB::table('image_place')->select('id', 'image')->where('place_id', $place_detail->id)->get();
-
-        //đưa ra sản phẩm liên quan
-  //       $place = new Place;
-  //       $place = $place->place()->get();
-  //       $related = Place::whereHas('link', function($query) use($place) 
-		// { 
-		//     $query->where('name', $place->link); 
-		// })->whereNotIn('name', [$place->name])->get();
-		// dd($related);
 
 		// đưa ra random 10 địa điểm
 		$random_place = Place::orderByRaw("RAND()")->get()->take(3);
@@ -116,7 +104,9 @@ class HomeController extends Controller {
 		}
 		$cmt = new CommentsPlace;
 		$cmt = $cmt->findComment($link_place)->get();
-        return view('fontend.pages.place.show', compact('place_detail','cmt', 'image', 'random_place', 'related','wishlist_place'));
+		$new_place = new Place;
+		$new_place = $new_place->find_New(4)->get();
+        return view('fontend.pages.place.show', compact('place_detail','new_place','cmt', 'image', 'random_place', 'related','wishlist_place'));
 	}
 
 	/**
@@ -181,7 +171,7 @@ class HomeController extends Controller {
     public function search(){
         $tag=Session('tag');
         $place= new Place;
-        $place=$place->SearchFood($tag)->paginate(8);
+        $place=$place->SearchPlace($tag)->paginate(8);
 
         $place->setPath('tim-kiem');
         $total=$place -> count();
@@ -198,48 +188,6 @@ class HomeController extends Controller {
     }
 
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
-	public function placenew()
-	{
-		$random = Place::orderByRaw("RAND()")->get()->take(10);
-		dd($random);
-		$newplace = new Place;
-		$newplace = $newplace->findNewPlace()->get();
-		return view('fontend.pages.danh-sach.newplace', compact('newplace'));
-	}
-
 	public function mostviewplace()
 	{
 		$place = new Place;
@@ -247,11 +195,6 @@ class HomeController extends Controller {
 		return view('fontend.pages.danh-sach.mostviewplace');
 	}
 
-	//Ham đưa ra số người đăng nhiều địa điểm
-	public function UserPostPlace()
-	{
-
-	}
 
 	public function placemostview()
 	{

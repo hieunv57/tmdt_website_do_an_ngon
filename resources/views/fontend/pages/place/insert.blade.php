@@ -68,7 +68,7 @@
                         <div class="b-form-row">
                             <label class="b-form-vertical__label" for="name">Tên </label>
                             <div class="b-form-vertical__input">
-                                <input type="text" id="name" name="name" class="form-control" />
+                                <input type="text" id="name" name="name" required class="form-control" />
                             </div>
                         </div>
                         <div class="b-form-row">
@@ -83,7 +83,7 @@
                         <div class="b-form-row">
                             <label class="b-form-vertical__label" for="email">Địa chỉ</label>
                             <div class="b-form-vertical__input">
-                                <input type="text" id="email" name="address" class="form-control" />
+                                <input type="text" id="email" name="address" required class="form-control" />
                             </div>
                         </div>
                         <div class="b-form-row">
@@ -95,7 +95,7 @@
                         <div class="b-form-row">
                             <label class="b-form-vertical__label" for="website">Ảnh chính</label>
                             <div class="b-form-vertical__input">
-                                <input type="file" id="website" name="fImages" class="form-control" />
+                                <input type="file" id="website" name="fImages" required class="form-control" />
                             </div>
                         </div>
                          <div class="b-form-row">

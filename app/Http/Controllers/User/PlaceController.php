@@ -6,11 +6,12 @@ use App\Place;
 use App\Category;
 use Illuminate\Http\Request;
 use App\UserPlace;
-use Auth;
+use Auth, Request as RequestAjax;
 use Illuminate\Support\Facades\Redirect;
 use App\User;
 use App\WishListPlace;
 use App\Foods;
+use App\RatePlace;
 use File;
 use DB;
 use App\CommentsPlace;
@@ -167,6 +168,11 @@ class PlaceController extends Controller {
         if (!$temp){
             $wishList->save();
         }
+        $q = DB::table('place')->where('id',$id)->first();
+        $total_wishlist = $q->total_wishlist+1;
+        $query = DB::table('place')->where('id',$id)
+      	->update(['total_wishlist'=> $total_wishlist]);
+
         return Redirect::back();
     }
 
@@ -187,5 +193,60 @@ class PlaceController extends Controller {
     	$cmt ->place_id = $place_detail->id;
     	$cmt->save();
     	return redirect()->back();
+    }
+
+ 	public function ratexxx()
+ 	{
+ 		if (RequestAjax::ajax()) {
+
+            $request = RequestAjax::all();
+
+            $placeID = $request['placeID'];
+            $value = $request['value'];
+
+            $response = array(
+                'status' => 'success',
+                'placeID' => $placeID,
+                'value' => $value,
+            );
+            $rate = new RatePlace;
+            $rate->point = $value;
+            $rate->place_id=$placeID;
+            $rate->user_id=Auth::user()->id;
+            $rate->save();
+            //Cập nhật điểm
+           	$q = new RatePlace;
+           	$q = $q->findRatebyPlace($placeID)->get();
+           	$sum=0;
+           	foreach($q as $item)
+           	{
+           		$sum += $item->point;
+           	}
+           	
+	        $avg_point = $sum/count($q,2);	
+
+	        $query = DB::table('place')->where('id',$placeID)
+	      	->update(['avg_point'=> $avg_point]);
+
+
+            $response = json_encode($response);
+            return $response;
+        }
+    }
+    public function cmt()
+    {
+    	if (RequestAjax::ajax()) {
+
+            $request = RequestAjax::all();
+
+            $cmt = $request['comment'];
+
+            $response = array(
+                'status' => 'success',
+                'comment' => $comment,
+            );
+            $response = json_encode($response);
+            return $response;
+    	}
     }
 }

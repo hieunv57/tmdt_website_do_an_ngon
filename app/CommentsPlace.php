@@ -20,7 +20,7 @@ class CommentsPlace extends Model {
 
 	 public function findComment()
     {
-        $cmt=DB::table('comments_place')->select('comments_place.*', 'users.name as user_name')
+        $cmt=DB::table('comments_place')->select('comments_place.*', 'users.name as user_name','users.avatar as user_avatar')
             ->join('place','comments_place.place_id','=','place.id')
             ->join('users','comments_place.user_id','=','users.id')
             ->groupby('comments_place.id');

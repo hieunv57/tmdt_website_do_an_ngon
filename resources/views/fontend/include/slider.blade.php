@@ -3,7 +3,7 @@
           <ul>
               <li data-transition="" data-slotamount="7">
                   <div class="tp-bannertimer"></div>
-                  <img data-retina src="{{asset('public/fontend/img/slider/slider1.jpg')}}">
+                  <img data-retina src="{{asset('public/fontend/img/slider/slider4.jpg')}}">
                   <div class="caption sfb"  data-x="30" data-y="bottom" data-speed="700" data-start="1700" data-easing="Power4.easeOut"></div>
                   <div class="caption"  data-x="180" data-y="bottom" data-voffset="-1" data-speed="2100" data-start="3300" data-easing="easeOutBack"></div>
                   <div class="caption lfr"  data-x="400"  data-y="100" data-speed="300" data-start="2000">

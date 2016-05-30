@@ -30,13 +30,22 @@ class Place extends Model {
             return $place;
     }
 
-    public function findNewPlace()
+    public function findNewPlace($soluong)
     {
          $place=DB::table('place')->select('place.*', 'users.name as name_user')
             ->join('user_place','place.id','=','user_place.place_id')
             ->join('users','user_place.user_id','=','users.id')
             ->groupby('place.id')
-            ->orderby('place.created_at', 'desc')->take(1000);
+            ->orderby('place.created_at', 'desc')->take($soluong);
+            return $place;
+    }
+    public function findHighPoint($soluong)
+    {
+         $place=DB::table('place')->select('place.*', 'users.name as name_user')
+            ->join('user_place','place.id','=','user_place.place_id')
+            ->join('users','user_place.user_id','=','users.id')
+            ->groupby('place.id')
+            ->orderby('place.avg_point', 'desc')->take($soluong);
             return $place;
     }
 
@@ -48,6 +57,15 @@ class Place extends Model {
             ->join('users','user_place.user_id','=','users.id')
             ->groupby('place.id')
             ->orderby('place.view', 'desc')->take($soluong);
+            return $place;
+    }
+     public function findPlaceMostWishList($soluong)
+    {
+        $place=DB::table('place')->select('place.*', 'users.name as name_user')
+            ->join('user_place','place.id','=','user_place.place_id')
+            ->join('users','user_place.user_id','=','users.id')
+            ->groupby('place.id')
+            ->orderby('place.total_wishlist', 'desc')->take($soluong);
             return $place;
     }
 

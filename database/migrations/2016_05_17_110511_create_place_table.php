@@ -19,6 +19,7 @@ class CreatePlaceTable extends Migration {
 			$table->string('address');
 			$table->string('video');
 			$table->string('link');
+			$table->float('avg_point');
 			$table->string('phone');
 			$table->longText('description');
 			$table->integer('view');

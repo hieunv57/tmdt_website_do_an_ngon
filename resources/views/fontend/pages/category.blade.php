@@ -64,9 +64,8 @@
 
                             <div class="container">
                                 <div class="b-pagination f-pagination">
-    <ul>
-       {!!$place -> render()!!}
-</div>
+                                   {!!$place -> render()!!}
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -28,32 +28,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9 ">
-                <div class="b-sort-panel">
-    <!-- <div class="b-sort-panel__inner">
-        <form action="#">
-            <div class="b-select b-left">
-                <select class="j-select" name="productAtPage" id="productAtPage">
-                    <option>1 products/page</option>
-                    <option>6 products/page</option>
-                    <option selected="selected">9 products/page</option>
-                </select>
-            </div>
 
-            <div class="b-select b-left">
-                <select class="j-select" name="productAtPage" id="productAtPage">
-                    <option>Order by price</option>
-                    <option selected="selected">Order by name</option>
-                </select>
-            </div>
-            <div class="b-sort-panel__inner_icon-sort f-sort-panel__inner_icon-sort fa fa-sort-amount-desc"></div>
-
-            <div class="b-view-switcher f-view-switcher b-right">
-                <div class="b-view-switcher_column is-view-switcher__item-active fa fa-th-list"></div>
-                <div class="b-view-switcher_table fa fa-th"></div>
-            </div>
-        </form>
-    </div> -->
-				</div>
 				<a href="{{asset('danh-sach/dia-diem-moi')}}" "email me"><h3>Địa điểm mới nhất</h3></a>
                 <div class="row">
                     <div class="b-col-default-indent">
@@ -74,8 +49,8 @@
 								</div>
 							    <div class="b-product-preview__content">
 							        <div class="b-product-preview__content_col">
-							            <!-- <span class="b-product-preview__content_price f-product-preview__content_price f-primary-b">{{$item->price}}</span> -->
-							        </div>
+                                        <span class="b-product-preview__content_price f-product-preview__content_price f-primary-b">{{$item->view}}</span>
+                                    </div>
 							        <div class="b-product-preview__content_col">
                                         <h6><div class="b-some-examples__item_info_level b-some-examples__item_name f-some-examples__item_name f-primary-b"><a href="{{url('dia-diem/'.$item->link)}}" >{{$item->name}}</a></div></h6>
 							            <!-- <a href="{{url('dia-diem/'.$item->link)}}" class="f-product-preview__content_category f-primary-b">{{$item->name}}</a> -->
@@ -127,6 +102,83 @@
 
                     </div>
                 </div>
+
+                <hr>
+                <a href="{{asset('danh-sach/dia-diem-duoc-danh-gia-cao')}}"><h3>Địa điểm được đánh giá cao</h3></a>
+                
+                <div class="row">
+                    <div class="b-col-default-indent">
+                    @foreach($highpoint as $item)
+                        <div class="col-md-4 col-sm-4 col-xs-6 col-mini-12">
+                            <div class="b-product-preview">
+                                <div class="b-product-preview__img view view-sixth">
+                                    <img data-retina src="{{asset('public/backend/images/places/' .$item->image)}}" style="height:262px; width:268px" alt=""/>
+                                    <div class="b-item-hover-action f-center mask">
+                                        <div class="b-item-hover-action__inner">
+                                            <div class="b-item-hover-action__inner-btn_group">
+                                                <a href="{{asset('them-vao-yeu-thich/'.$item->id)}}" class="b-btn f-btn b-btn-light f-btn-light info"><i class="fa fa-heart"></i></a>
+                                                
+                                                <a href="{{url('dia-diem/'.$item->link)}}"  class="b-btn f-btn b-btn-light f-btn-light info"><i class="fa fa-link"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="b-product-preview__content">
+                                    <div class="b-product-preview__content_col">
+                                        <span class="b-product-preview__content_price f-product-preview__content_price f-primary-b">{{$item->avg_point}}</span>
+                                    </div>
+                                    <div class="b-product-preview__content_col">
+                                        <h6><div class="b-some-examples__item_info_level b-some-examples__item_name f-some-examples__item_name f-primary-b"><a href="{{url('dia-diem/'.$item->link)}}" >{{$item->name}}</a></div></h6>
+                                        <div class="f-product-preview__content_category f-primary-b">{{$item->address}}</div>
+                                        <div>Đăng bởi<a href=""> {{$item->name_user}}</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        @endforeach
+
+                    </div>
+                </div>
+
+                <hr>
+                <a href="{{asset('danh-sach/dia-diem-duoc-quan-tam')}}"><h3>Địa điểm có nhiều lượt yêu thích</h3></a>
+                
+                <div class="row">
+                    <div class="b-col-default-indent">
+                    @foreach($place_most_wishlist as $item)
+                        <div class="col-md-4 col-sm-4 col-xs-6 col-mini-12">
+                            <div class="b-product-preview">
+                                <div class="b-product-preview__img view view-sixth">
+                                    <img data-retina src="{{asset('public/backend/images/places/' .$item->image)}}" style="height:262px; width:268px" alt=""/>
+                                    <div class="b-item-hover-action f-center mask">
+                                        <div class="b-item-hover-action__inner">
+                                            <div class="b-item-hover-action__inner-btn_group">
+                                                <a href="{{asset('them-vao-yeu-thich/'.$item->id)}}" class="b-btn f-btn b-btn-light f-btn-light info"><i class="fa fa-heart"></i></a>
+                                                
+                                                <a href="{{url('dia-diem/'.$item->link)}}"  class="b-btn f-btn b-btn-light f-btn-light info"><i class="fa fa-link"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="b-product-preview__content">
+                                    <div class="b-product-preview__content_col">
+                                        <span class="b-product-preview__content_price f-product-preview__content_price f-primary-b">{{$item->view}}</span>
+                                    </div>
+                                    <div class="b-product-preview__content_col">
+                                        <h6><div class="b-some-examples__item_info_level b-some-examples__item_name f-some-examples__item_name f-primary-b"><a href="{{url('dia-diem/'.$item->link)}}" >{{$item->name}}</a></div></h6>
+                                        <div class="f-product-preview__content_category f-primary-b">{{$item->address}}</div>
+                                        <div>Đăng bởi<a href=""> {{$item->name_user}}</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        @endforeach
+
+                    </div>
+                </div>
+                <hr>
                 <a href="{{asset('danh-sach/dia-diem-moi')}}" "email me"><h3>Món ngon </h3></a>
                 <div class="row">
                     <div class="b-col-default-indent">
@@ -200,17 +252,27 @@
         </div>
         @if(!Auth::guest())
         <div class="col-md-12">
-            <div class="b-categories-filter">
-                <h4 class="f-primary-b b-h4-special f-h4-special c-primary">Địa điểm yêu thích</h4>
-                <ul>
-                @foreach  ($wishlist_place as $item)
-                    <li>
-                        <a class="f-categories-filter_name" href="{{asset('dia-diem/'.$item->link)}}"><i class="fa fa-plus"></i>{{$item->name}}</a>
-                        <span class="b-categories-filter_count f-categories-filter_count">{{$item->view}}</span>
-                    </li>
-                @endforeach
-                </ul>
+            <h4 class="f-primary-b b-h4-special f-h4-special c-primary">Địa điểm yêu thích của bạn</h4>
+            @foreach($wishlist_place as $item)
+            <div class="b-blog-short-post b-blog-short-post--popular b-blog-short-post--w-img b-blog-short-post--img-hover-bordered f-blog-short-post--w-img row f-blog-short-post--popular">
+                <div class="b-blog-short-post__item col-md-12 col-sm-6 col-xs-12">
+                    <div class="b-blog-short-post__item_img">
+                        <a href="{{url('dia-diem/'.$item->link)}}"><img data-retina src="{{asset('public/backend/images/places/' .$item->image)}}" style="height:100px; width:110px" alt=""/></a>
+                    </div>
+                    <div class="b-remaining">
+                        <div class="b-blog-short-post__item_text f-blog-short-post__item_text">
+                            <a href="{{url('dia-diem/'.$item->link)}}">{{$item->name}} </a>
+                        </div>
+                        <div class="f-blog-short-post__item_price  f-primary-b">
+                            <h5>{{$item->address}}</h5>
+                        </div>
+                        <div>
+                            {{$item->total_wishlist}} lượt yêu thích
+                        </div>
+                    </div>
+                </div>
             </div>
+            @endforeach
         </div>
         @endif
         <div class="col-md-12">

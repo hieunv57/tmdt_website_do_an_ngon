@@ -60,7 +60,7 @@ return [
 		        'host' => '127.0.0.1'
 		    ],
 		    'driver'    => 'mysql',
-		    'database'  => 'food5',
+		    'database'  => 'foodplace',
 		    'username'  => 'root',
 		    'password'  => '',
 		    'charset'   => 'utf8',
